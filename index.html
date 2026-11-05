@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TuitionDesk</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;-webkit-tap-highlight-color:transparent;}
-body{background:#0B0F19;display:flex;justify-content:center;min-height:100vh;}
-.app{width:100%;max-width:440px;background:#F8FAFC;min-height:100vh;padding-bottom:90px;display:flex;flex-direction:column;position:relative;}
-.hdr{background:#FFF;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E2E8F0;position:sticky;top:0;z-index:40;}
-.logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4F46E5,#3730A3);color:#FFF;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;}
-.btn-add{background:#4F46E5;color:#FFF;border:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;}
-.cnt{padding:16px;display:flex;flex-direction:column;gap:12px;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent;}
+body{background:#090D16;display:flex;justify-content:center;min-height:100vh;}
+.app{width:100%;max-width:430px;background:#F8FAFC;min-height:100vh;padding-bottom:95px;display:flex;flex-direction:column;position:relative;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);}
+.hdr{background:#FFF;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E2E8F0;position:sticky;top:0;z-index:40;}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#6366F1,#4338CA);color:#FFF;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(99,102,241,0.35);}
+.btn-add{background:linear-gradient(135deg,#4F46E5,#4338CA);color:#FFF;border:none;padding:7px 14px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(79,70,229,0.3);}
+.cnt{padding:16px;display:flex;flex-direction:column;gap:14px;}
 .tab{display:none;flex-direction:column;gap:12px;}
 .tab.active{display:flex;}
-.card{background:#FFF;border-radius:16px;border:1px solid #E2E8F0;padding:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,0.04);}
+.card{background:#FFF;border-radius:18px;border:1px solid #EEF2F6;padding:15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 18px rgba(15,23,42,0.04);}
 .c-left{display:flex;align-items:center;gap:12px;}
-.av{width:40px;height:40px;border-radius:12px;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.av-pink{background:#FCE7F3;color:#BE185D;}
-.av-amber{background:#FEF3C7;color:#D97706;}
+.av{width:42px;height:42px;border-radius:14px;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.av-pink{background:#FDF2F8;color:#DB2777;}
+.av-amber{background:#FFFBEB;color:#D97706;}
 .av-ind{background:#EEF2FF;color:#4F46E5;}
-.av-grn{background:#DCFCE7;color:#15803D;}
-.av-blu{background:#E0F2FE;color:#0369A1;}
-.tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;}
+.av-grn{background:#ECFDF5;color:#059669;}
+.av-blu{background:#F0F9FF;color:#0284C7;}
+.tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;}
 .tag-red{background:#FEE2E2;color:#DC2626;}
 .tag-amb{background:#FEF3C7;color:#D97706;}
-.btn-wa{background:#25D366;color:#FFF;width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;}
-.btn-del{background:#FEE2E2;color:#DC2626;width:34px;height:34px;border-radius:10px;border:none;font-size:14px;cursor:pointer;}
-.att-box{display:flex;gap:4px;background:#F1F5F9;padding:4px;border-radius:10px;}
-.b-att{border:none;width:36px;height:32px;border-radius:7px;font-weight:800;font-size:13px;cursor:pointer;}
-.b-att.p-on{background:#10B981;color:#FFF;}
-.b-att.a-on{background:#EF4444;color:#FFF;}
+.btn-wa{background:#25D366;color:#FFF;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;box-shadow:0 4px 12px rgba(37,211,102,0.35);}
+.btn-del{background:#FFF1F2;color:#E11D48;width:34px;height:34px;border-radius:10px;border:none;font-size:14px;cursor:pointer;}
+.att-box{display:flex;gap:4px;background:#F1F5F9;padding:4px;border-radius:12px;}
+.b-att{border:none;width:38px;height:34px;border-radius:9px;font-weight:800;font-size:13px;cursor:pointer;}
+.b-att.p-on{background:#10B981;color:#FFF;box-shadow:0 2px 8px rgba(16,185,129,0.3);}
+.b-att.a-on{background:#EF4444;color:#FFF;box-shadow:0 2px 8px rgba(239,68,68,0.3);}
 .b-att.off{background:transparent;color:#64748B;}
-.upi-box{background:linear-gradient(135deg,#1E1B4B,#0F172A);border-radius:20px;padding:18px;color:#FFF;display:flex;flex-direction:column;gap:12px;}
-.b-upi{background:#10B981;color:#FFF;text-decoration:none;padding:14px;border-radius:12px;font-weight:800;font-size:15px;text-align:center;display:block;}
-.b-nav{position:fixed;bottom:0;left:0;right:0;margin:0 auto;width:100%;max-width:440px;background:#FFF;border-top:1px solid #E2E8F0;display:flex;justify-content:space-around;padding:10px 0;z-index:999;}
+.chart-box{background:#FFF;border-radius:18px;border:1px solid #EEF2F6;padding:16px;box-shadow:0 4px 18px rgba(15,23,42,0.04);}
+.chart-bars{height:115px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding-top:14px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.bar-pill{width:100%;max-width:30px;background:#F1F5F9;border-radius:8px 8px 3px 3px;}
+.bar-pill.hi{background:linear-gradient(180deg,#6366F1,#4338CA);box-shadow:0 4px 12px rgba(99,102,241,0.4);}
+.upi-card{background:radial-gradient(circle at top right,#312E81,#0F172A);border-radius:22px;padding:22px;color:#FFF;display:flex;flex-direction:column;gap:14px;box-shadow:0 16px 36px rgba(15,23,42,0.35);border:1px solid rgba(255,255,255,0.1);}
+.b-upi{background:#10B981;color:#FFF;text-decoration:none;padding:15px;border-radius:14px;font-weight:800;font-size:15px;text-align:center;display:block;box-shadow:0 8px 24px rgba(16,185,129,0.4);}
+.b-nav{position:fixed;bottom:0;left:0;right:0;margin:0 auto;width:100%;max-width:430px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-top:1px solid #E2E8F0;display:flex;justify-content:space-around;padding:10px 0;z-index:999;box-shadow:0 -6px 20px rgba(0,0,0,0.04);}
 .n-btn{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:#94A3B8;flex:1;cursor:pointer;}
-.n-btn.active{color:#4F46E5;font-weight:800;}
-#toast{display:none;position:fixed;top:75px;left:50%;transform:translateX(-50%);background:#0F172A;color:#FFF;padding:10px 20px;border-radius:25px;font-size:12px;font-weight:600;z-index:1001;}
+.n-btn.active{color:#4F46E5;font-weight:800;transform:translateY(-1px);}
+#toast{display:none;position:fixed;top:75px;left:50%;transform:translateX(-50%);background:#0F172A;color:#FFF;padding:10px 22px;border-radius:30px;font-size:12px;font-weight:600;z-index:1001;box-shadow:0 10px 30px rgba(0,0,0,0.25);}
 #addModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1000;justify-content:center;align-items:center;padding:20px;}
-.m-box{background:#FFF;width:100%;max-width:360px;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;}
-.m-box input{width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:10px;font-size:13px;outline:none;}
+.m-box{background:#FFF;width:100%;max-width:360px;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px;}
+.m-box input{width:100%;padding:13px;border:1px solid #CBD5E1;border-radius:12px;font-size:13px;outline:none;}
 </style>
 </head>
 <body>
@@ -47,77 +52,89 @@ body{background:#0B0F19;display:flex;justify-content:center;min-height:100vh;}
   <header class="hdr">
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="logo">TD</div>
-      <div><strong style="font-size:16px;color:#0F172A;">TuitionDesk</strong><div style="font-size:11px;color:#64748B;">Anwar Classes • Class 9 & 10</div></div>
+      <div><strong style="font-size:16px;color:#0F172A;letter-spacing:-0.3px;">TuitionDesk</strong><div style="font-size:11px;color:#64748B;font-weight:500;">Anwar Classes • Class 7, 8, 9th & 10th</div></div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <button onclick="openModal()" class="btn-add">+ Add</button>
-      <span style="background:#ECFDF5;color:#059669;font-size:11px;font-weight:700;padding:4px 8px;border-radius:10px;">5 Students</span>
+      <span style="background:#ECFDF5;color:#059669;border:1px solid #A7F3D0;font-size:11px;font-weight:700;padding:4px 8px;border-radius:12px;">5 Active</span>
     </div>
   </header>
-  <div id="toast">Notification</div>
+  <div id="toast">Alert Sent!</div>
   <main class="cnt">
     <!-- 1. FEES TAB -->
     <section id="tab-fees" class="tab active">
       <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div><strong style="font-size:18px;color:#0F172A;">Pending Fees</strong><div style="font-size:12px;color:#64748B;">5 students • ₹400 each</div></div>
-        <button onclick="bulkRemindWhatsApp()" style="background:#10B981;color:#FFF;border:none;padding:7px 12px;border-radius:8px;font-weight:700;font-size:11px;cursor:pointer;">Remind All</button>
+        <div><strong style="font-size:18px;color:#0F172A;letter-spacing:-0.4px;">Pending Fees</strong><div style="font-size:12px;color:#64748B;">5 students overdue • ₹400 each</div></div>
+        <button onclick="bulkRemindWhatsApp()" style="background:#10B981;color:#FFF;border:none;padding:7px 12px;border-radius:10px;font-weight:700;font-size:11px;cursor:pointer;">Remind All</button>
       </div>
       <div id="feesList" style="display:flex;flex-direction:column;gap:10px;">
-        <div class="card" style="border-left:4px solid #EF4444;"><div class="c-left"><div class="av av-pink">SD</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Sannidhya Das</strong><span class="tag tag-red">14d late</span></div><div style="font-size:12px;color:#64748B;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543211&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Sannidhya%20Das%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #F59E0B;"><div class="c-left"><div class="av av-amber">PR</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Pritam</strong><span class="tag tag-amb">10d late</span></div><div style="font-size:12px;color:#64748B;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543212&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Pritam%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #F59E0B;"><div class="c-left"><div class="av av-ind">AG</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Ankush Ghosh</strong><span class="tag tag-amb">7d late</span></div><div style="font-size:12px;color:#64748B;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543213&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Ankush%20Ghosh%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #4F46E5;"><div class="c-left"><div class="av av-grn">RU</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Rudro</strong><span class="tag" style="background:#EEF2FF;color:#4F46E5;">3d late</span></div><div style="font-size:12px;color:#64748B;">₹400 due • Class 9</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543214&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Rudro%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #4F46E5;"><div class="c-left"><div class="av av-blu">SA</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Sayan</strong><span class="tag" style="background:#EEF2FF;color:#4F46E5;">Due Today</span></div><div style="font-size:12px;color:#64748B;">₹400 due • Class 9</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543215&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Sayan%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card" style="border-left:4px solid #EF4444;"><div class="c-left"><div class="av av-pink">SD</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Sannidhya Das</strong><span class="tag tag-red">14d late</span></div><div style="font-size:12px;color:#64748B;margin-top:2px;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543211&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Sannidhya%20Das%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card" style="border-left:4px solid #F59E0B;"><div class="c-left"><div class="av av-amber">PR</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Pritam</strong><span class="tag tag-amb">10d late</span></div><div style="font-size:12px;color:#64748B;margin-top:2px;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543212&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Pritam%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card" style="border-left:4px solid #F59E0B;"><div class="c-left"><div class="av av-ind">AG</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Ankush Ghosh</strong><span class="tag tag-amb">7d late</span></div><div style="font-size:12px;color:#64748B;margin-top:2px;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543213&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Ankush%20Ghosh%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card" style="border-left:4px solid #4F46E5;"><div class="c-left"><div class="av av-grn">RU</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Rudro</strong><span class="tag" style="background:#EEF2FF;color:#4F46E5;">3d late</span></div><div style="font-size:12px;color:#64748B;margin-top:2px;">₹400 due • Class 9</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543214&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Rudro%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card" style="border-left:4px solid #4F46E5;"><div class="c-left"><div class="av av-blu">SA</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F172A;">Sayan</strong><span class="tag" style="background:#EEF2FF;color:#4F46E5;">Due Today</span></div><div style="font-size:12px;color:#64748B;margin-top:2px;">₹400 due • Class 9</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543215&text=Namaste%2C%20fee%20of%20Rs%20400%20for%20Sayan%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
       </div>
     </section>
     <!-- 2. ATTENDANCE TAB -->
     <section id="tab-attendance" class="tab">
-      <strong style="font-size:18px;color:#0F172A;">Today's Attendance</strong>
+      <div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:18px;color:#0F172A;">Today's Attendance</strong><span style="font-size:11px;font-weight:700;color:#4F46E5;background:#EEF2FF;padding:4px 8px;border-radius:8px;">Class 7, 8, 9th & 10th</span></div>
       <div class="card"><div class="c-left"><div class="av av-pink">SD</div><strong>Sannidhya Das</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
       <div class="card"><div class="c-left"><div class="av av-amber">PR</div><strong>Pritam</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
       <div class="card"><div class="c-left"><div class="av av-ind">AG</div><strong>Ankush Ghosh</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att off">P</button><button onclick="markAtt(this,'A')" class="b-att a-on">A</button></div></div>
       <div class="card"><div class="c-left"><div class="av av-grn">RU</div><strong>Rudro</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
       <div class="card"><div class="c-left"><div class="av av-blu">SA</div><strong>Sayan</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
-      <button onclick="alert('Absent Alert Sent to WhatsApp!')" style="background:#4F46E5;color:#FFF;border:none;padding:14px;border-radius:12px;font-weight:700;cursor:pointer;">Save & Send Absent Alert</button>
+      <button onclick="alert('Absent Alert Sent to WhatsApp!')" style="background:linear-gradient(135deg,#4F46E5,#4338CA);color:#FFF;border:none;padding:15px;border-radius:14px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(79,70,229,0.35);">Save & Send Absent Alert</button>
     </section>
     <!-- 3. TESTS TAB -->
     <section id="tab-tests" class="tab">
-      <strong style="font-size:18px;color:#0F172A;">Weekly Test Marks</strong>
-      <div class="card"><div class="c-left"><span style="font-size:18px;">🥇</span><div><strong>1. Ankush Ghosh</strong><div style="font-size:11px;color:#64748B;">48/50 (96%)</div></div></div><button onclick="shareTest('Ankush Ghosh',48,1)" style="background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:6px 12px;border-radius:8px;font-weight:700;font-size:11px;">Share</button></div>
-      <div class="card"><div class="c-left"><span style="font-size:18px;">🥈</span><div><strong>2. Sannidhya Das</strong><div style="font-size:11px;color:#64748B;">46/50 (92%)</div></div></div><button onclick="shareTest('Sannidhya Das',46,2)" style="background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:6px 12px;border-radius:8px;font-weight:700;font-size:11px;">Share</button></div>
-      <div class="card"><div class="c-left"><span style="font-size:18px;">🥉</span><div><strong>3. Pritam</strong><div style="font-size:11px;color:#64748B;">42/50 (84%)</div></div></div><button onclick="shareTest('Pritam',42,3)" style="background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:6px 12px;border-radius:8px;font-weight:700;font-size:11px;">Share</button></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:18px;color:#0F172A;">Weekly Evaluation</strong><span style="font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;padding:4px 8px;border-radius:8px;">Evaluated</span></div>
+      <div class="chart-box">
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:8px;"><span style="color:#64748B;">Class Average Trend</span><span style="color:#4F46E5;">Latest: 86%</span></div>
+        <div class="chart-bars">
+          <div class="bar-col"><span style="font-size:10px;color:#64748B;">32</span><div class="bar-pill" style="height:60%;"></div><span style="font-size:10px;color:#64748B;">T1</span></div>
+          <div class="bar-col"><span style="font-size:10px;color:#64748B;">38</span><div class="bar-pill" style="height:70%;"></div><span style="font-size:10px;color:#64748B;">T2</span></div>
+          <div class="bar-col"><span style="font-size:10px;color:#64748B;">28</span><div class="bar-pill" style="height:50%;"></div><span style="font-size:10px;color:#64748B;">T3</span></div>
+          <div class="bar-col"><span style="font-size:10px;color:#64748B;">41</span><div class="bar-pill" style="height:78%;"></div><span style="font-size:10px;color:#64748B;">T4</span></div>
+          <div class="bar-col"><span style="font-size:10px;color:#64748B;">36</span><div class="bar-pill" style="height:68%;"></div><span style="font-size:10px;color:#64748B;">T5</span></div>
+          <div class="bar-col"><span style="font-size:11px;color:#4F46E5;font-weight:800;">46</span><div class="bar-pill hi" style="height:92%;"></div><span style="font-size:10px;font-weight:800;color:#4F46E5;">T6</span></div>
+        </div>
+      </div>
+      <div class="card"><div class="c-left"><span style="font-size:18px;">🥇</span><div><strong>1. Ankush Ghosh</strong><div style="font-size:11px;color:#64748B;">Score: 48/50 (96%)</div></div></div><button onclick="shareTest('Ankush Ghosh',48,1)" style="background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:6px 12px;border-radius:10px;font-weight:700;font-size:11px;">Share</button></div>
+      <div class="card"><div class="c-left"><span style="font-size:18px;">🥈</span><div><strong>2. Sannidhya Das</strong><div style="font-size:11px;color:#64748B;">Score: 46/50 (92%)</div></div></div><button onclick="shareTest('Sannidhya Das',46,2)" style="background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:6px 12px;border-radius:10px;font-weight:700;font-size:11px;">Share</button></div>
+      <div class="card"><div class="c-left"><span style="font-size:18px;">🥉</span><div><strong>3. Pritam</strong><div style="font-size:11px;color:#64748B;">Score: 42/50 (84%)</div></div></div><button onclick="shareTest('Pritam',42,3)" style="background:#EEF2FF;color:#4F46E5;border:1px solid #C7D2FE;padding:6px 12px;border-radius:10px;font-weight:700;font-size:11px;">Share</button></div>
     </section>
     <!-- 4. PARENT VIEW TAB -->
     <section id="tab-parent" class="tab">
-      <div class="card" style="background:#EEF2FF;border-color:#C7D2FE;"><div class="c-left"><div class="av av-pink">SD</div><div><div style="font-size:10px;font-weight:800;color:#4F46E5;">PARENT VIEW</div><strong>Sannidhya Das</strong></div></div><span style="font-size:11px;font-weight:700;background:#DCFCE7;color:#15803D;padding:4px 8px;border-radius:6px;">Enrolled</span></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div class="card" style="flex-direction:column;align-items:flex-start;"><div style="font-size:11px;color:#64748B;">Attendance</div><div style="font-size:22px;font-weight:800;color:#0F172A;margin:4px 0;">94%</div><div style="font-size:10px;color:#10B981;">22/24 Present</div></div>
-        <div class="card" style="flex-direction:column;align-items:flex-start;"><div style="font-size:11px;color:#64748B;">Homework</div><div style="font-size:16px;font-weight:800;color:#10B981;margin:6px 0;">Done</div><div style="font-size:10px;color:#64748B;">Checked</div></div>
+      <div class="card" style="background:#EEF2FF;border-color:#C7D2FE;"><div class="c-left"><div class="av av-pink">SD</div><div><div style="font-size:10px;font-weight:800;color:#4F46E5;text-transform:uppercase;">Student Portal</div><strong>Sannidhya Das (Class 10)</strong></div></div><span style="font-size:11px;font-weight:700;background:#DCFCE7;color:#15803D;padding:4px 8px;border-radius:6px;">Active</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="card" style="flex-direction:column;align-items:flex-start;"><div style="font-size:11px;color:#64748B;">Attendance Rate</div><div style="font-size:24px;font-weight:900;color:#0F172A;margin:4px 0;">94%</div><div style="font-size:10px;color:#10B981;font-weight:600;">22/24 Present</div></div>
+        <div class="card" style="flex-direction:column;align-items:flex-start;"><div style="font-size:11px;color:#64748B;">Homework</div><div style="font-size:16px;font-weight:800;color:#10B981;margin:6px 0;">Done</div><div style="font-size:10px;color:#64748B;">Math Checked</div></div>
       </div>
-      <div class="upi-box">
-        <div style="display:flex;justify-content:space-between;"><div><div style="font-size:11px;color:#A5B4FC;">Monthly Fee Due</div><div style="font-size:30px;font-weight:900;">₹400</div></div><span style="font-size:10px;background:rgba(255,255,255,0.1);padding:4px 8px;border-radius:6px;">Class 10</span></div>
-        <a href="upi://pay?pa=tuitiondesk@upi&pn=Anwar%20Classes&am=400&cu=INR" class="b-upi">Pay ₹400 by UPI</a>
+      <div class="upi-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div style="font-size:11px;color:#A5B4FC;text-transform:uppercase;letter-spacing:0.5px;">Monthly Fee Due</div><div style="font-size:32px;font-weight:900;margin-top:2px;">₹400</div></div><span style="font-size:10px;background:rgba(255,255,255,0.15);padding:4px 8px;border-radius:6px;">Class 10</span></div>
+        <a href="upi://pay?pa=tuitiondesk@upi&pn=Anwar%20Classes&am=400&cu=INR" class="b-upi">Pay ₹400 via UPI</a>
+        <div style="font-size:10px;color:#94A3B8;text-align:center;">GPay • PhonePe • Paytm • BHIM</div>
       </div>
     </section>
     <!-- 5. OWNER DASHBOARD TAB -->
     <section id="tab-dashboard" class="tab">
-      <strong style="font-size:18px;color:#0F172A;">Monthly Accounts</strong>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div class="card" style="background:#ECFDF5;border-color:#A7F3D0;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#065F46;font-weight:700;">Potential</span><div style="font-size:22px;font-weight:900;color:#065F46;margin:3px 0;">₹2,000</div><span style="font-size:10px;color:#059669;">5 Students × ₹400</span></div>
-        <div class="card" style="background:#FEF2F2;border-color:#FECACA;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#991B1B;font-weight:700;">Pending</span><div style="font-size:22px;font-weight:900;color:#991B1B;margin:3px 0;">₹2,000</div><span style="font-size:10px;color:#DC2626;">5 Students Overdue</span></div>
+      <strong style="font-size:18px;color:#0F172A;letter-spacing:-0.4px;">Monthly Revenue</strong>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="card" style="background:#ECFDF5;border-color:#A7F3D0;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#065F46;font-weight:700;">Potential</span><div style="font-size:22px;font-weight:900;color:#065F46;margin:4px 0;">₹2,000</div><span style="font-size:10px;color:#059669;">5 Students × ₹400</span></div>
+        <div class="card" style="background:#FFF1F2;border-color:#FECDD3;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#9F1239;font-weight:700;">Pending</span><div style="font-size:22px;font-weight:900;color:#9F1239;margin:4px 0;">₹2,000</div><span style="font-size:10px;color:#E11D48;">5 Overdue</span></div>
       </div>
-      <div class="card"><div><strong>Total Batch Strength</strong></div><strong style="font-size:20px;color:#4F46E5;">5 Students</strong></div>
+      <div class="card"><div><strong style="font-size:14px;color:#0F172A;">Batch Strength</strong><div style="font-size:11px;color:#64748B;">Class 7, 8, 9th & 10th</div></div><strong style="font-size:20px;color:#4F46E5;">5 Students</strong></div>
     </section>
   </main>
   <!-- Modal -->
-  <div id="addModal"><div class="m-box"><strong style="font-size:16px;">Add New Student</strong><input type="text" id="newStName" placeholder="Student Name" /><input type="text" id="newStClass" placeholder="Class (e.g. Class 10)" /><input type="number" id="newStFee" placeholder="Fee (Default 400)" value="400" /><input type="tel" id="newStPhone" placeholder="WhatsApp No." /><div style="display:flex;gap:10px;"><button onclick="closeModal()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#F1F5F9;font-weight:700;">Cancel</button><button onclick="saveNewStudent()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#4F46E5;color:#FFF;font-weight:700;">Save</button></div></div></div>
-  <!-- Bottom Nav -->
+  <div id="addModal"><div class="m-box"><strong style="font-size:16px;color:#0F172A;">Add New Student</strong><input type="text" id="newStName" placeholder="Student Name" /><input type="text" id="newStClass" placeholder="Class (e.g. Class 8)" /><input type="number" id="newStFee" placeholder="Fee (Default 400)" value="400" /><input type="tel" id="newStPhone" placeholder="WhatsApp Number" /><div style="display:flex;gap:10px;"><button onclick="closeModal()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#F1F5F9;font-weight:700;color:#64748B;">Cancel</button><button onclick="saveNewStudent()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#4F46E5;color:#FFF;font-weight:700;">Save</button></div></div></div>
+<!-- Bottom Nav -->
   <nav class="b-nav">
-    <button onclick="openTab('fees', this)" class="n-btn active"><span style="font-size:18px;">💰</span><span>Fees</span></button>
-    <button onclick="openTab('attendance', this)" class="n-btn"><span style="font-size:18px;">📋</span><span>Attendance</span></button>
-    <button onclick="openTab('tests', this)" class="n-btn"><span style="font-size:18px;">📊</span><span>Tests</span></button>
-    <button onclick="openTab('parent', this)" class="n-btn"><span style="font-size:18px;">👨‍👩‍👦</span><span>Parent</span></button>
-    <button onclick="openTab('dashboard', this)" class="n-btn"><span style="font-size:18px;">📈</span><span>Owner</span></button>
+    <button onclick="openTab('fees', this)" class="n-btn active"><span style="font-size:18px;">💳</span><span>Fees</span></button>
+    <button onclick="openTab('attendance', this)" class="n-btn"><span style="font-size:18px;">📅</span><span>Attendance</span></button>
+    <button onclick="openTab('tests', this)" class="n-btn"><span style="font-size:18px;">📈</span><span>Tests</span></button>
+    <button onclick="openTab('parent', this)" class="n-btn"><span style="font-size:18px;">👨‍👩‍👧</span><span>Parent</span></button>
+    <button onclick="openTab('dashboard', this)" class="n-btn"><span style="font-size:18px;">📊</span><span>Owner</span></button>
   </nav>
 </div>
 <script>
@@ -125,7 +142,7 @@ function openTab(id, btn){document.querySelectorAll('.tab').forEach(t=>t.classLi
 function markAtt(btn, s){var p=btn.parentElement,b=p.querySelectorAll('.b-att');b[0].className='b-att off';b[1].className='b-att off';if(s==='P')b[0].className='b-att p-on';else b[1].className='b-att a-on';}
 function openModal(){document.getElementById('addModal').style.display='flex';}
 function closeModal(){document.getElementById('addModal').style.display='none';}
-function saveNewStudent(){var n=document.getElementById('newStName').value.trim();if(!n)return;var c=document.getElementById('newStClass').value||'Class 10',f=document.getElementById('newStFee').value||'400',p=document.getElementById('newStPhone').value||'9876543210',i=n.substring(0,2).toUpperCase();document.getElementById('feesList').innerHTML+='<div class="card" style="border-left:4px solid #4F46E5;"><div class="c-left"><div class="av av-ind">'+i+'</div><div><strong>'+n+'</strong><div style="font-size:12px;color:#64748B;">₹'+f+' due • '+c+'</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=91'+p+'&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest(\'.card\').remove()" class="btn-del">🗑️</button></div></div>';closeModal();}
+function saveNewStudent(){var n=document.getElementById('newStName').value.trim();if(!n)return;var c=document.getElementById('newStClass').value||'Class 8',f=document.getElementById('newStFee').value||'400',p=document.getElementById('newStPhone').value||'9876543210',i=n.substring(0,2).toUpperCase();document.getElementById('feesList').innerHTML+='<div class="card" style="border-left:4px solid #4F46E5;"><div class="c-left"><div class="av av-ind">'+i+'</div><div><strong>'+n+'</strong><div style="font-size:12px;color:#64748B;">₹'+f+' due • '+c+'</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=91'+p+'&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest(\'.card\').remove()" class="btn-del">🗑️</button></div></div>';closeModal();}
 function bulkRemindWhatsApp(){window.location.href="whatsapp://send?text="+encodeURIComponent("Gentle reminder: Tuition fee of Rs 400 is pending. Kindly clear via UPI.");}
 function shareTest(n,s,r){window.location.href="whatsapp://send?text="+encodeURIComponent('Report Card:\nStudent: '+n+'\nScore: '+s+'/50 (Rank #'+r+')');}
 </script>
