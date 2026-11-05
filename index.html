@@ -34,13 +34,19 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
 .b-nav{position:fixed;bottom:0;left:0;right:0;margin:0 auto;width:100%;max-width:430px;background:#FFF;border-top:1px solid #EBF1FA;display:flex;justify-content:space-around;padding:10px 0;z-index:999;box-shadow:0 -6px 20px rgba(30,88,244,0.06);}
 .n-btn{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:#8FA0BC;flex:1;cursor:pointer;}
 .n-btn.active{color:#1856F3;font-weight:800;}
-#addModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,29,64,0.5);backdrop-filter:blur(4px);z-index:1000;justify-content:center;align-items:center;padding:20px;}
+.chart-box{background:#FFF;border-radius:18px;border:1px solid #EBF1FA;padding:16px;}
+.chart-bars{height:110px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding-top:12px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
+.bar-pill{width:100%;max-width:28px;background:#EBF2FF;border-radius:6px 6px 2px 2px;}
+.bar-pill.hi{background:linear-gradient(180deg,#1856F3,#0C3AB3);}
+#addModal, #regModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,29,64,0.6);backdrop-filter:blur(5px);z-index:1000;justify-content:center;align-items:center;padding:20px;}
 .m-box{background:#FFF;width:100%;max-width:350px;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px;}
 .m-box input, .m-box select{width:100%;padding:13px;border:1px solid #D6E2F5;border-radius:12px;font-size:13px;outline:none;}
 </style>
 </head>
 <body>
 <div class="app">
+<!-- Header with Auto-Live Date Badge -->
   <header class="hdr">
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="logo-box">
@@ -55,21 +61,22 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
       </div>
       <div>
         <strong style="font-size:16px;color:#0F1D40;">TuitionDesk</strong>
-        <div style="font-size:11px;color:#6C81A6;font-weight:600;">Anwar Classes • Smart Batches</div>
+        <div style="font-size:11px;color:#6C81A6;font-weight:600;">Anwar Classes • Live Portal</div>
       </div>
     </div>
-    <span id="currentBatchTag" style="background:#ECFDF5;color:#059669;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;">● All Batches</span>
+    <!-- LIVE DATE BADGE (Auto updates every midnight) -->
+    <span id="liveDateBadge" style="background:#ECFDF5;color:#059669;font-size:11px;font-weight:800;padding:5px 10px;border-radius:20px;border:1px solid #A7F3D0;">📅 Today</span>
   </header>
 
   <main class="cnt">
     <!-- 1. HOME TAB (Batch Isolated) -->
     <section id="tab-fees" class="tab active">
       <div>
-        <div style="font-size:22px;font-weight:900;color:#0F1D40;">Your Batchmates 👋</div>
-        <div style="font-size:12px;color:#5E7399;">Showing students of your class:</div>
+        <div style="font-size:22px;font-weight:900;color:#0F1D40;">Welcome! 👋</div>
+        <div style="font-size:12px;color:#5E7399;" id="liveDateSub">Live Attendance & Batch Status</div>
       </div>
 
-      <!-- Batch Filter Pills (Teacher can switch, student sees only their class) -->
+      <!-- Batch Filter (Students locked to their class) -->
       <div class="batch-scroll" id="batchPills">
         <button onclick="filterBatch('all', this)" class="b-pill active" data-class="all">All</button>
         <button onclick="filterBatch('Class 10', this)" class="b-pill" data-class="Class 10">Class 10</button>
@@ -78,46 +85,39 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
         <button onclick="filterBatch('Class 7', this)" class="b-pill" data-class="Class 7">Class 7</button>
       </div>
 
-      <!-- Batch Student Directory -->
+      <!-- Student Cards (Safe view) -->
       <div id="studentList" style="display:flex;flex-direction:column;gap:10px;">
-        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-pink">SD</div><div><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Class 10</span></div>
-        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-amb">PR</div><div><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Class 10</span></div>
-        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-blu">AG</div><div><strong style="font-size:14px;color:#0F1D40;">Ankush Ghosh</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Class 10</span></div>
-        <div class="card" data-class="Class 9"><div class="c-left"><div class="av av-grn">RU</div><div><strong style="font-size:14px;color:#0F1D40;">Rudro</strong><div style="font-size:12px;color:#6C81A6;">Class 9</div></div></div><span class="tag tag-blu">Class 9</span></div>
-        <div class="card" data-class="Class 9"><div class="c-left"><div class="av av-blu">SA</div><div><strong style="font-size:14px;color:#0F1D40;">Sayan</strong><div style="font-size:12px;color:#6C81A6;">Class 9</div></div></div><span class="tag tag-blu">Class 9</span></div>
+        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-pink">SD</div><div><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Enrolled</span></div>
+        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-amb">PR</div><div><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Enrolled</span></div>
+        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-blu">AG</div><div><strong style="font-size:14px;color:#0F1D40;">Ankush Ghosh</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Enrolled</span></div>
+        <div class="card" data-class="Class 9"><div class="c-left"><div class="av av-grn">RU</div><div><strong style="font-size:14px;color:#0F1D40;">Rudro</strong><div style="font-size:12px;color:#6C81A6;">Class 9</div></div></div><span class="tag tag-blu">Enrolled</span></div>
+        <div class="card" data-class="Class 9"><div class="c-left"><div class="av av-blu">SA</div><div><strong style="font-size:14px;color:#0F1D40;">Sayan</strong><div style="font-size:12px;color:#6C81A6;">Class 9</div></div></div><span class="tag tag-blu">Enrolled</span></div>
       </div>
     </section>
 
-    <!-- 2. ATTENDANCE TAB -->
+    <!-- 2. ATTENDANCE TAB (With Live Calendar Date) -->
     <section id="tab-attendance" class="tab">
-      <strong style="font-size:18px;color:#0F1D40;">Attendance Status</strong>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="font-size:18px;color:#0F1D40;">Daily Attendance</strong>
+        <span id="attDateBadge" style="font-size:11px;font-weight:700;color:#1856F3;background:#EBF2FF;padding:4px 8px;border-radius:8px;">Live</span>
+      </div>
       <div class="card"><div class="c-left"><div class="av av-pink">SD</div><strong>Sannidhya Das</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
       <div class="card"><div class="c-left"><div class="av av-amb">PR</div><strong>Pritam</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
-      <div class="card"><div class="c-left"><div class="av av-grn">RU</div><strong>Rudro</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
+      <div class="card"><div class="c-left"><div class="av av-blu">AG</div><strong>Ankush Ghosh</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
     </section>
 
     <!-- 3. TESTS TAB -->
     <section id="tab-tests" class="tab">
-      <strong style="font-size:18px;color:#0F1D40;">Test Leaderboard</strong>
+      <strong style="font-size:18px;color:#0F1D40;">Weekly Test Rank</strong>
       <div class="card"><div class="c-left"><span style="font-size:18px;">🥇</span><div><strong>1. Ankush Ghosh</strong><div style="font-size:11px;color:#6C81A6;">Score: 48/50</div></div></div><span class="tag tag-blu">Rank #1</span></div>
       <div class="card"><div class="c-left"><span style="font-size:18px;">🥈</span><div><strong>2. Sannidhya Das</strong><div style="font-size:11px;color:#6C81A6;">Score: 46/50</div></div></div><span class="tag tag-blu">Rank #2</span></div>
     </section>
 
-    <!-- 4. PARENT VIEW (Select your child -> Locks to that batch!) -->
+    <!-- 4. PARENT VIEW TAB (Permanently Locked to Registered Student) -->
     <section id="tab-parent" class="tab">
-      <div>
-        <label style="font-size:12px;font-weight:700;color:#6C81A6;display:block;margin-bottom:6px;">Select Student (Identifies Your Batch):</label>
-        <select id="parentSelect" onchange="updateParentPortal()" style="width:100%;padding:12px;border:1px solid #C7D9FA;border-radius:14px;background:#FFF;font-size:14px;font-weight:700;color:#0F1D40;outline:none;">
-          <option value="Sannidhya Das|Class 10|400">Sannidhya Das (Class 10)</option>
-          <option value="Pritam|Class 10|400">Pritam (Class 10)</option>
-          <option value="Ankush Ghosh|Class 10|400">Ankush Ghosh (Class 10)</option>
-          <option value="Rudro|Class 9|400">Rudro (Class 9)</option>
-          <option value="Sayan|Class 9|400">Sayan (Class 9)</option>
-        </select>
-      </div>
       <div class="card" style="background:#EBF2FF;border-color:#C7D9FA;">
-        <div class="c-left"><div class="av av-pink" id="parentAv">SD</div><div><div style="font-size:10px;font-weight:800;color:#1856F3;">STUDENT PORTAL</div><strong id="parentName" style="font-size:15px;color:#0F1D40;">Sannidhya Das</strong><div id="parentClass" style="font-size:11px;color:#6C81A6;">Class 10 Batch</div></div></div>
-        <span class="tag" style="background:#DCFCE7;color:#15803D;">Active</span>
+        <div class="c-left"><div class="av av-pink" id="parentAv">SD</div><div><div style="font-size:10px;font-weight:800;color:#1856F3;">VERIFIED STUDENT PORTAL</div><strong id="parentName" style="font-size:15px;color:#0F1D40;">Sannidhya Das</strong><div id="parentClass" style="font-size:11px;color:#6C81A6;">Class 10 Batch</div></div></div>
+        <span class="tag" style="background:#DCFCE7;color:#15803D;">Device Locked</span>
       </div>
       <div class="hero-fee-card">
         <div style="font-size:11px;color:#9EC5FF;">Monthly Fee Due</div>
@@ -125,10 +125,10 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
         <a id="parentUpiLink" href="upi://pay?pa=tuitiondesk@upi&pn=Anwar%20Classes&am=400&cu=INR" class="hero-fee-btn">Pay via UPI ➔</a>
       </div>
     </section>
-    <!-- 5. OWNER TAB (PIN PROTECTED - Master Hub for 200 Students) -->
+    <!-- 5. OWNER TAB (PIN PROTECTED - Master Hub) -->
     <section id="tab-dashboard" class="tab">
       <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div><strong style="font-size:18px;color:#0F1D40;">Teacher Admin Hub</strong><div style="font-size:11px;color:#6C81A6;">Manage All Batches & Income</div></div>
+        <div><strong style="font-size:18px;color:#0F1D40;">Teacher Admin Hub</strong><div style="font-size:11px;color:#6C81A6;">Multi-Batch Management</div></div>
         <button onclick="openModal()" style="background:#1856F3;color:#FFF;border:none;padding:8px 14px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer;">+ Add Student</button>
       </div>
 
@@ -146,22 +146,44 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
         </div>
       </div>
 
-      <!-- Revenue -->
+      <!-- Financials -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div class="card" style="background:#ECFDF5;border-color:#A7F3D0;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#065F46;font-weight:700;">Potential</span><div style="font-size:20px;font-weight:900;color:#065F46;margin:3px 0;">₹2,000</div><span style="font-size:10px;color:#059669;">5 Students</span></div>
         <div class="card" style="background:#FFF1F2;border-color:#FECDD3;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#9F1239;font-weight:700;">Pending</span><div style="font-size:20px;font-weight:900;color:#9F1239;margin:4px 0;">₹2,000</div><span style="font-size:10px;color:#E11D48;">5 Overdue</span></div>
       </div>
 
-      <!-- Admin Actions -->
-      <strong style="font-size:15px;color:#0F1D40;">All Overdue Students (Delete / Remind)</strong>
+      <!-- Reset Student Lock (Teacher can reset student devices) -->
+      <div class="card" onclick="resetDeviceLock()" style="cursor:pointer;background:#F0F4FA;padding:12px;">
+        <div class="c-left"><span style="font-size:18px;">🔄</span><div><strong style="font-size:13px;color:#0F1D40;">Reset Device Lock</strong><div style="font-size:10px;color:#6C81A6;">Allows student to re-select profile on this phone</div></div></div>
+        <span style="font-size:11px;font-weight:700;color:#1856F3;">Reset</span>
+      </div>
+
+      <!-- Manage Students -->
+      <strong style="font-size:15px;color:#0F1D40;">All Overdue Students</strong>
       <div id="feesList" style="display:flex;flex-direction:column;gap:10px;">
-        <div class="card"><div class="c-left"><div class="av av-pink">SD</div><div><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><div style="font-size:11px;color:#6C81A6;">Class 10 • ₹400</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543211&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card"><div class="c-left"><div class="av av-amb">PR</div><div><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><div style="font-size:11px;color:#6C81A6;">Class 10 • ₹400</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543212&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card"><div class="c-left"><div class="av av-pink">SD</div><div><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><div style="font-size:11px;color:#6C81A6;">Class 10 • ₹400</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543211&text=Tuition%20Fee%20Pending" class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card"><div class="c-left"><div class="av av-amb">PR</div><div><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><div style="font-size:11px;color:#6C81A6;">Class 10 • ₹400</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543212&text=Tuition%20Fee%20Pending" class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
       </div>
     </section>
   </main>
 
-  <!-- Modal -->
+  <!-- Student Device Registration Modal (Appears ONCE per phone) -->
+  <div id="regModal">
+    <div class="m-box">
+      <strong style="font-size:17px;color:#0F1D40;">Welcome to Anwar Classes</strong>
+      <p style="font-size:12px;color:#6C81A6;">Select your profile to register this phone (One-time setup):</p>
+      <select id="regSelect">
+        <option value="Sannidhya Das|Class 10|400">Sannidhya Das (Class 10)</option>
+        <option value="Pritam|Class 10|400">Pritam (Class 10)</option>
+        <option value="Ankush Ghosh|Class 10|400">Ankush Ghosh (Class 10)</option>
+        <option value="Rudro|Class 9|400">Rudro (Class 9)</option>
+        <option value="Sayan|Class 9|400">Sayan (Class 9)</option>
+      </select>
+      <button onclick="confirmRegistration()" style="padding:14px;border:none;border-radius:14px;background:#1856F3;color:#FFF;font-weight:800;cursor:pointer;">Confirm & Lock Device</button>
+    </div>
+  </div>
+
+  <!-- Add Student Modal -->
   <div id="addModal"><div class="m-box"><strong style="font-size:16px;color:#0F1D40;">Add Student to Batch</strong><input type="text" id="newStName" placeholder="Student Name" /><select id="newStClass"><option value="Class 10">Class 10</option><option value="Class 9">Class 9</option><option value="Class 8">Class 8</option><option value="Class 7">Class 7</option></select><input type="number" id="newStFee" placeholder="Fee (Default 400)" value="400" /><input type="tel" id="newStPhone" placeholder="Parent WhatsApp No." /><div style="display:flex;gap:10px;"><button onclick="closeModal()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#F0F4FA;font-weight:700;color:#6C81A6;">Cancel</button><button onclick="saveNewStudent()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#1856F3;color:#FFF;font-weight:700;">Save</button></div></div></div>
 
   <!-- Bottom Nav -->
@@ -177,16 +199,62 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
 <script>
 var isTeacherUnlocked = false;
 
+// 1. LIVE AUTO-UPDATING CALENDAR CLOCK (Phone internal clock)
+function initLiveCalendar(){
+  var now = new Date();
+  var opts = { weekday: 'short', day: 'numeric', month: 'short' };
+  var dateStr = now.toLocaleDateString('en-IN', opts);
+  document.getElementById('liveDateBadge').innerText = "📅 " + dateStr;
+  document.getElementById('attDateBadge').innerText = dateStr;
+  document.getElementById('liveDateSub').innerText = "Live status for " + dateStr;
+}
+
+// 2. ONE-TIME STUDENT DEVICE REGISTRATION & LOCK
+function checkDeviceLock(){
+  var locked = localStorage.getItem('locked_student_profile');
+  if(!locked){
+    document.getElementById('regModal').style.display = 'flex';
+  } else {
+    applyProfile(locked);
+  }
+}
+
+function confirmRegistration(){
+  var sel = document.getElementById('regSelect').value;
+  localStorage.setItem('locked_student_profile', sel);
+  document.getElementById('regModal').style.display = 'none';
+  applyProfile(sel);
+  alert("✅ Phone registered successfully to your profile!");
+}
+
+function applyProfile(valStr){
+  var val = valStr.split('|');
+  var name = val[0], cls = val[1], fee = val[2];
+  document.getElementById('parentName').innerText = name;
+  document.getElementById('parentClass').innerText = cls + " Batch";
+  document.getElementById('parentAv').innerText = name.substring(0,2).toUpperCase();
+  document.getElementById('parentFeeDisplay').innerText = "₹ " + fee;
+  var upi = localStorage.getItem('teacher_upi') || 'tuitiondesk@upi';
+  document.getElementById('parentUpiLink').href = "upi://pay?pa=" + upi + "&pn=Anwar%20Classes&am=" + fee + "&cu=INR&tn=Fee_" + encodeURIComponent(name);
+
+  if(!isTeacherUnlocked){
+    filterBatch(cls, document.querySelector('.b-pill[data-class="'+cls+'"]'));
+  }
+}
+
+function resetDeviceLock(){
+  localStorage.removeItem('locked_student_profile');
+  alert("🔄 Device Lock Reset! Next time student opens, registration screen will show.");
+}
+
 function openTab(id, btn){
   var savedPin = localStorage.getItem('teacher_pin') || "1234";
   if(id === 'dashboard' && !isTeacherUnlocked){
-    var p = prompt("🔒 Enter Teacher PIN to access Admin Hub:");
+    var p = prompt("🔒 Enter Teacher PIN:");
     if(p === savedPin){ 
       isTeacherUnlocked = true; 
-      alert("✅ Teacher Access Granted! All 200 Students Unlocked.");
-      // Unlock all batch filters for teacher
+      alert("✅ Teacher Access Granted! All Batches Unlocked.");
       document.querySelectorAll('.b-pill').forEach(b => b.style.display = 'inline-block');
-      document.getElementById('currentBatchTag').innerText = "● Teacher Master View";
     } else { 
       if(p !== null) alert("❌ Incorrect PIN!"); return; 
     }
@@ -197,7 +265,6 @@ function openTab(id, btn){
   btn.classList.add('active');
 }
 
-// SMART BATCH FILTER (Isolates Class 9 from Class 10)
 function filterBatch(className, btn){
   document.querySelectorAll('.b-pill').forEach(p=>p.classList.remove('active'));
   if(btn) btn.classList.add('active');
@@ -208,27 +275,9 @@ function filterBatch(className, btn){
   });
 }
 
-// BATCH ISOLATION: When a student profile is chosen, lock the view to that batch!
-function updateParentPortal(){
-  var val = document.getElementById('parentSelect').value.split('|');
-  var name = val[0], cls = val[1], fee = val[2];
-  document.getElementById('parentName').innerText = name;
-  document.getElementById('parentClass').innerText = cls + " Batch";
-  document.getElementById('parentAv').innerText = name.substring(0,2).toUpperCase();
-  document.getElementById('parentFeeDisplay').innerText = "₹ " + fee;
-  var upi = localStorage.getItem('teacher_upi') || 'tuitiondesk@upi';
-  document.getElementById('parentUpiLink').href = "upi://pay?pa=" + upi + "&pn=Anwar%20Classes&am=" + fee + "&cu=INR&tn=Fee_" + encodeURIComponent(name);
-
-  // If NOT teacher, lock Home tab strictly to this student's class!
-  if(!isTeacherUnlocked){
-    filterBatch(cls, document.querySelector('.b-pill[data-class="'+cls+'"]'));
-    document.getElementById('currentBatchTag').innerText = "● " + cls + " Batch";
-  }
-}
-
 function setTeacherUpi(){
   var currentUpi = localStorage.getItem('teacher_upi') || 'tuitiondesk@upi';
-  var newUpi = prompt("Enter Teacher UPI ID (e.g. 9876543210@paytm, sir@oksbi):", currentUpi);
+  var newUpi = prompt("Enter Teacher UPI ID (e.g. 9876543210@paytm):", currentUpi);
   if(newUpi && newUpi.includes('@')){
     localStorage.setItem('teacher_upi', newUpi.trim());
     alert("✅ UPI ID Saved: " + newUpi);
@@ -239,7 +288,6 @@ function setTeacherUpi(){
 function updateUpiDisplay(){
   var upi = localStorage.getItem('teacher_upi');
   if(upi) document.getElementById('upiStatus').innerText = upi;
-  updateParentPortal();
 }
 
 function changePin(){
@@ -261,15 +309,15 @@ function saveNewStudent(){
   var i=n.substring(0,2).toUpperCase();
 
   document.getElementById('studentList').innerHTML += '<div class="card" data-class="'+c+'"><div class="c-left"><div class="av av-blu">'+i+'</div><div><strong style="font-size:14px;color:#0F1D40;">'+n+'</strong><div style="font-size:12px;color:#6C81A6;">'+c+'</div></div></div><span class="tag tag-blu">'+c+'</span></div>';
-  var opt = document.createElement('option');
-  opt.value = n + '|' + c + '|' + f;
-  opt.innerText = n + ' (' + c + ')';
-  document.getElementById('parentSelect').appendChild(opt);
   document.getElementById('feesList').innerHTML += '<div class="card"><div class="c-left"><div class="av av-blu">'+i+'</div><div><strong style="color:#0F1D40;">'+n+'</strong><div style="font-size:11px;color:#6C81A6;">'+c+' • ₹'+f+'</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=91'+p+'&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest(\'.card\').remove()" class="btn-del">🗑️</button></div></div>';
   closeModal();
 }
 
-window.onload = function(){ updateUpiDisplay(); };
+window.onload = function(){
+  initLiveCalendar();
+  checkDeviceLock();
+  updateUpiDisplay();
+};
 </script>
 </body>
 </html>
