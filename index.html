@@ -4,23 +4,22 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TuitionDesk</title>
 <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#1856F3">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%231E58F4'/><stop offset='100%25' stop-color='%23082E9B'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23bg)'/><polygon points='50,22 84,33 50,44 16,33' fill='%23FFFFFF'/><polygon points='50,27 75,34 50,40 25,34' fill='%23E2E8F0'/><path d='M76,34 v12' stroke='%23FBBF24' stroke-width='2.5' stroke-linecap='round'/><circle cx='76' cy='48' r='2.5' fill='%23FBBF24'/><path d='M38,45 h24 v7 h-8 v25 h-8 v-25 h-8 z' fill='%23FFFFFF'/><path d='M25,75 Q55,75 80,48 Q60,70 25,75' fill='%23FBBF24'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%231E58F4'/><stop offset='100%25' stop-color='%23082E9B'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23bg)'/><polygon points='50,18 88,32 50,46 12,32' fill='%23FFFFFF'/><polygon points='50,24 78,33 50,41 22,33' fill='%23DCE7FA'/><path d='M78,34 v14' stroke='%23FBBF24' stroke-width='3' stroke-linecap='round'/><circle cx='78' cy='50' r='3' fill='%23FBBF24'/><path d='M37,45 h26 v8 h-9 v26 h-8 v-26 h-9 z' fill='%23FFFFFF'/><path d='M22,76 Q55,76 82,46 Q60,70 22,76' fill='%23FBBF24'/></svg>">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent;}
 body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
 .app{width:100%;max-width:430px;background:linear-gradient(180deg,#EDF4FF 0%,#F5F8FF 40%,#FFFFFF 100%);min-height:100vh;padding-bottom:95px;display:flex;flex-direction:column;position:relative;box-shadow:0 20px 40px rgba(24,86,243,0.12);}
-.hdr{background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5EEFC;position:sticky;top:0;z-index:40;}
-.logo-box{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#1E58F4,#082E9B);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(30,88,244,0.35);flex-shrink:0;}
-.btn-add{background:linear-gradient(135deg,#1856F3,#0C3AB3);color:#FFF;border:none;padding:7px 14px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;}
+.hdr{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5EEFC;position:sticky;top:0;z-index:40;}
+.logo-box{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1E58F4,#082E9B);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(30,88,244,0.3);flex-shrink:0;}
 .cnt{padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
 .tab{display:none;flex-direction:column;gap:13px;}
 .tab.active{display:flex;}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.stat-pill{background:#FFF;border-radius:18px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 6px 18px rgba(30,88,244,0.05);border:1px solid #EBF1FA;}
-.stat-val{font-size:17px;font-weight:900;color:#0F1D40;}
-.stat-lbl{font-size:10px;color:#7184A6;font-weight:600;margin-top:2px;}
+.batch-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;}
+.batch-scroll::-webkit-scrollbar{display:none;}
+.b-pill{background:#FFF;border:1px solid #D6E2F5;color:#6C81A6;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;white-space:nowrap;cursor:pointer;}
+.b-pill.active{background:#1856F3;color:#FFF;border-color:#1856F3;box-shadow:0 4px 10px rgba(24,86,243,0.25);}
 .hero-fee-card{background:linear-gradient(135deg,#004CE8 0%,#002C99 60%,#001C66 100%);border-radius:22px;padding:18px 20px;color:#FFF;box-shadow:0 12px 28px rgba(0,44,153,0.3);position:relative;overflow:hidden;}
-.hero-fee-btn{background:#FFF;color:#0034B8;text-decoration:none;padding:12px 16px;border-radius:30px;font-weight:800;font-size:13px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,0.15);margin-top:10px;}
+.hero-fee-btn{background:#FFF;color:#0034B8;text-decoration:none;padding:12px 18px;border-radius:30px;font-weight:800;font-size:13px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,0.15);margin-top:10px;}
 .card{background:#FFF;border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 14px rgba(30,88,244,0.04);border:1px solid #EBF1FA;}
 .c-left{display:flex;align-items:center;gap:12px;}
 .av{width:42px;height:42px;border-radius:14px;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -29,27 +28,15 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
 .av-amb{background:#FFFBEB;color:#D97706;}
 .av-grn{background:#ECFDF5;color:#059669;}
 .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;}
-.tag-red{background:#FEE2E2;color:#DC2626;}
-.tag-amb{background:#FEF3C7;color:#D97706;}
 .tag-blu{background:#EBF2FF;color:#1856F3;}
-.btn-wa{background:#25D366;color:#FFF;width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;box-shadow:0 4px 12px rgba(37,211,102,0.3);}
+.btn-wa{background:#25D366;color:#FFF;width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;}
 .btn-del{background:#FEE2E2;color:#DC2626;width:32px;height:32px;border-radius:9px;border:none;font-size:13px;cursor:pointer;}
-.att-box{display:flex;gap:4px;background:#F0F4FA;padding:4px;border-radius:12px;}
-.b-att{border:none;width:36px;height:32px;border-radius:8px;font-weight:800;font-size:13px;cursor:pointer;}
-.b-att.p-on{background:#10B981;color:#FFF;}
-.b-att.a-on{background:#EF4444;color:#FFF;}
-.b-att.off{background:transparent;color:#7184A6;}
 .b-nav{position:fixed;bottom:0;left:0;right:0;margin:0 auto;width:100%;max-width:430px;background:#FFF;border-top:1px solid #EBF1FA;display:flex;justify-content:space-around;padding:10px 0;z-index:999;box-shadow:0 -6px 20px rgba(30,88,244,0.06);}
 .n-btn{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:#8FA0BC;flex:1;cursor:pointer;}
 .n-btn.active{color:#1856F3;font-weight:800;}
-.chart-box{background:#FFF;border-radius:18px;border:1px solid #EBF1FA;padding:16px;}
-.chart-bars{height:110px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding-top:12px;}
-.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
-.bar-pill{width:100%;max-width:28px;background:#EBF2FF;border-radius:6px 6px 2px 2px;}
-.bar-pill.hi{background:linear-gradient(180deg,#1856F3,#0C3AB3);}
 #addModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,29,64,0.5);backdrop-filter:blur(4px);z-index:1000;justify-content:center;align-items:center;padding:20px;}
 .m-box{background:#FFF;width:100%;max-width:350px;border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px;}
-.m-box input{width:100%;padding:13px;border:1px solid #D6E2F5;border-radius:12px;font-size:13px;outline:none;}
+.m-box input, .m-box select{width:100%;padding:13px;border:1px solid #D6E2F5;border-radius:12px;font-size:13px;outline:none;}
 </style>
 </head>
 <body>
@@ -57,7 +44,7 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
   <header class="hdr">
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="logo-box">
-        <svg width="28" height="28" viewBox="0 0 100 100">
+        <svg width="26" height="26" viewBox="0 0 100 100">
           <polygon points="50,18 88,32 50,46 12,32" fill="#FFFFFF"/>
           <polygon points="50,24 78,33 50,41 22,33" fill="#DCE7FA"/>
           <path d="M78,34 v14" stroke="#FBBF24" stroke-width="3" stroke-linecap="round"/>
@@ -67,105 +54,116 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
         </svg>
       </div>
       <div>
-        <strong style="font-size:16px;color:#0F1D40;letter-spacing:-0.3px;">TuitionDesk</strong>
-        <div style="font-size:11px;color:#6C81A6;font-weight:600;">Anwar Classes • Class 7, 8, 9th & 10th</div>
+        <strong style="font-size:16px;color:#0F1D40;">TuitionDesk</strong>
+        <div style="font-size:11px;color:#6C81A6;font-weight:600;">Anwar Classes • Smart Batches</div>
       </div>
     </div>
-    <button onclick="openModal()" class="btn-add">+ Add</button>
+    <span id="currentBatchTag" style="background:#ECFDF5;color:#059669;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;">● All Batches</span>
   </header>
+
   <main class="cnt">
-    <!-- 1. HOME TAB -->
+    <!-- 1. HOME TAB (Batch Isolated) -->
     <section id="tab-fees" class="tab active">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div><div style="font-size:22px;font-weight:900;color:#0F1D40;">Good Morning! 👋</div><div style="font-size:12px;color:#5E7399;">Keep going. Batch is doing great!</div></div>
-        <span style="background:#ECFDF5;color:#059669;border:1px solid #A7F3D0;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;">● Live Batch</span>
+      <div>
+        <div style="font-size:22px;font-weight:900;color:#0F1D40;">Your Batchmates 👋</div>
+        <div style="font-size:12px;color:#5E7399;">Showing students of your class:</div>
       </div>
-      <div class="stats-grid">
-        <div class="stat-pill"><div style="font-size:14px;margin-bottom:4px;">👥</div><div class="stat-val">5</div><div class="stat-lbl">Students</div></div>
-        <div class="stat-pill"><div style="font-size:14px;margin-bottom:4px;">%</div><div class="stat-val">94%</div><div class="stat-lbl">Attendance</div></div>
-        <div class="stat-pill"><div style="font-size:14px;margin-bottom:4px;">₹</div><div class="stat-val">₹2,000</div><div class="stat-lbl">Monthly</div></div>
+
+      <!-- Batch Filter Pills (Teacher can switch, student sees only their class) -->
+      <div class="batch-scroll" id="batchPills">
+        <button onclick="filterBatch('all', this)" class="b-pill active" data-class="all">All</button>
+        <button onclick="filterBatch('Class 10', this)" class="b-pill" data-class="Class 10">Class 10</button>
+        <button onclick="filterBatch('Class 9', this)" class="b-pill" data-class="Class 9">Class 9</button>
+        <button onclick="filterBatch('Class 8', this)" class="b-pill" data-class="Class 8">Class 8</button>
+        <button onclick="filterBatch('Class 7', this)" class="b-pill" data-class="Class 7">Class 7</button>
       </div>
-      <div class="hero-fee-card">
-        <div style="font-size:11px;color:#9EC5FF;font-weight:600;">🗓️ Monthly Fee Due</div>
-        <div style="font-size:32px;font-weight:900;margin-top:2px;">₹ 400 <span style="font-size:12px;font-weight:600;color:#9EC5FF;">/ student</span></div>
-        <div style="font-size:11px;color:#BACFFF;margin-top:2px;">5 Students Overdue • Anwar Classes</div>
-        <a href="upi://pay?pa=tuitiondesk@upi&pn=Anwar%20Classes&am=400&cu=INR" class="hero-fee-btn">Pay ₹400 via UPI ➔</a>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
-        <strong style="font-size:16px;color:#0F1D40;">Pending Students (5)</strong>
-        <button onclick="bulkRemindWhatsApp()" style="background:#10B981;color:#FFF;border:none;padding:6px 12px;border-radius:10px;font-weight:700;font-size:11px;cursor:pointer;">Remind All</button>
-      </div>
-      <div id="feesList" style="display:flex;flex-direction:column;gap:10px;">
-        <div class="card" style="border-left:4px solid #EF4444;"><div class="c-left"><div class="av av-pink">SD</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><span class="tag tag-red">14d late</span></div><div style="font-size:12px;color:#6C81A6;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543211&text=Namaste%2C%20fee%20of%20Rs%20400%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #F59E0B;"><div class="c-left"><div class="av av-amb">PR</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><span class="tag tag-amb">10d late</span></div><div style="font-size:12px;color:#6C81A6;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543212&text=Namaste%2C%20fee%20of%20Rs%20400%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #F59E0B;"><div class="c-left"><div class="av av-blu">AG</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F1D40;">Ankush Ghosh</strong><span class="tag tag-amb">7d late</span></div><div style="font-size:12px;color:#6C81A6;">₹400 due • Class 10</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543213&text=Namaste%2C%20fee%20of%20Rs%20400%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #1856F3;"><div class="c-left"><div class="av av-grn">RU</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F1D40;">Rudro</strong><span class="tag tag-blu">3d late</span></div><div style="font-size:12px;color:#6C81A6;">₹400 due • Class 9</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543214&text=Namaste%2C%20fee%20of%20Rs%20400%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
-        <div class="card" style="border-left:4px solid #1856F3;"><div class="c-left"><div class="av av-blu">SA</div><div><div style="display:flex;align-items:center;gap:6px;"><strong style="font-size:14px;color:#0F1D40;">Sayan</strong><span class="tag tag-blu">Due Today</span></div><div style="font-size:12px;color:#6C81A6;">₹400 due • Class 9</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543215&text=Namaste%2C%20fee%20of%20Rs%20400%20is%20pending." class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+
+      <!-- Batch Student Directory -->
+      <div id="studentList" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-pink">SD</div><div><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Class 10</span></div>
+        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-amb">PR</div><div><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Class 10</span></div>
+        <div class="card" data-class="Class 10"><div class="c-left"><div class="av av-blu">AG</div><div><strong style="font-size:14px;color:#0F1D40;">Ankush Ghosh</strong><div style="font-size:12px;color:#6C81A6;">Class 10</div></div></div><span class="tag tag-blu">Class 10</span></div>
+        <div class="card" data-class="Class 9"><div class="c-left"><div class="av av-grn">RU</div><div><strong style="font-size:14px;color:#0F1D40;">Rudro</strong><div style="font-size:12px;color:#6C81A6;">Class 9</div></div></div><span class="tag tag-blu">Class 9</span></div>
+        <div class="card" data-class="Class 9"><div class="c-left"><div class="av av-blu">SA</div><div><strong style="font-size:14px;color:#0F1D40;">Sayan</strong><div style="font-size:12px;color:#6C81A6;">Class 9</div></div></div><span class="tag tag-blu">Class 9</span></div>
       </div>
     </section>
+
     <!-- 2. ATTENDANCE TAB -->
     <section id="tab-attendance" class="tab">
-      <div style="display:flex;justify-content:space-between;align-items:center;"><strong style="font-size:18px;color:#0F1D40;">Today's Attendance</strong><span style="font-size:11px;font-weight:700;color:#1856F3;background:#EBF2FF;padding:4px 8px;border-radius:8px;">5 Enrolled</span></div>
-      <div class="card"><div class="c-left"><div class="av av-pink">SD</div><strong>Sannidhya Das</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
-      <div class="card"><div class="c-left"><div class="av av-amb">PR</div><strong>Pritam</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
-      <div class="card"><div class="c-left"><div class="av av-blu">AG</div><strong>Ankush Ghosh</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att off">P</button><button onclick="markAtt(this,'A')" class="b-att a-on">A</button></div></div>
-      <div class="card"><div class="c-left"><div class="av av-grn">RU</div><strong>Rudro</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
-      <div class="card"><div class="c-left"><div class="av av-blu">SA</div><strong>Sayan</strong></div><div class="att-box"><button onclick="markAtt(this,'P')" class="b-att p-on">P</button><button onclick="markAtt(this,'A')" class="b-att off">A</button></div></div>
-      <button onclick="alert('Absent Alert Sent to WhatsApp!')" style="background:linear-gradient(135deg,#1856F3,#0C3AB3);color:#FFF;border:none;padding:15px;border-radius:14px;font-weight:800;cursor:pointer;">Save & Send Absent Alert</button>
+      <strong style="font-size:18px;color:#0F1D40;">Attendance Status</strong>
+      <div class="card"><div class="c-left"><div class="av av-pink">SD</div><strong>Sannidhya Das</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
+      <div class="card"><div class="c-left"><div class="av av-amb">PR</div><strong>Pritam</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
+      <div class="card"><div class="c-left"><div class="av av-grn">RU</div><strong>Rudro</strong></div><span class="tag" style="background:#DCFCE7;color:#15803D;">Present</span></div>
     </section>
+
     <!-- 3. TESTS TAB -->
     <section id="tab-tests" class="tab">
-      <strong style="font-size:18px;color:#0F1D40;">Weekly Evaluation</strong>
-      <div class="chart-box">
-        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:8px;"><span style="color:#6C81A6;">Average Trend</span><span style="color:#1856F3;">Latest: 86%</span></div>
-        <div class="chart-bars">
-          <div class="bar-col"><span style="font-size:10px;color:#6C81A6;">32</span><div class="bar-pill" style="height:60%;"></div><span style="font-size:10px;color:#6C81A6;">T1</span></div>
-          <div class="bar-col"><span style="font-size:10px;color:#6C81A6;">38</span><div class="bar-pill" style="height:70%;"></div><span style="font-size:10px;color:#6C81A6;">T2</span></div>
-          <div class="bar-col"><span style="font-size:10px;color:#6C81A6;">28</span><div class="bar-pill" style="height:50%;"></div><span style="font-size:10px;color:#6C81A6;">T3</span></div>
-          <div class="bar-col"><span style="font-size:10px;color:#6C81A6;">41</span><div class="bar-pill" style="height:78%;"></div><span style="font-size:10px;color:#6C81A6;">T4</span></div>
-          <div class="bar-col"><span style="font-size:10px;color:#6C81A6;">36</span><div class="bar-pill" style="height:68%;"></div><span style="font-size:10px;color:#6C81A6;">T5</span></div>
-          <div class="bar-col"><span style="font-size:11px;color:#1856F3;font-weight:800;">46</span><div class="bar-pill hi" style="height:92%;"></div><span style="font-size:10px;font-weight:800;color:#1856F3;">T6</span></div>
-        </div>
-      </div>
-      <div class="card"><div class="c-left"><span style="font-size:18px;">🥇</span><div><strong>1. Ankush Ghosh</strong><div style="font-size:11px;color:#6C81A6;">Score: 48/50</div></div></div><button onclick="shareTest('Ankush Ghosh',48,1)" style="background:#EBF2FF;color:#1856F3;border:1px solid #C7D9FA;padding:6px 12px;border-radius:10px;font-weight:700;font-size:11px;">Share</button></div>
-      <div class="card"><div class="c-left"><span style="font-size:18px;">🥈</span><div><strong>2. Sannidhya Das</strong><div style="font-size:11px;color:#6C81A6;">Score: 46/50</div></div></div><button onclick="shareTest('Sannidhya Das',46,2)" style="background:#EBF2FF;color:#1856F3;border:1px solid #C7D9FA;padding:6px 12px;border-radius:10px;font-weight:700;font-size:11px;">Share</button></div>
+      <strong style="font-size:18px;color:#0F1D40;">Test Leaderboard</strong>
+      <div class="card"><div class="c-left"><span style="font-size:18px;">🥇</span><div><strong>1. Ankush Ghosh</strong><div style="font-size:11px;color:#6C81A6;">Score: 48/50</div></div></div><span class="tag tag-blu">Rank #1</span></div>
+      <div class="card"><div class="c-left"><span style="font-size:18px;">🥈</span><div><strong>2. Sannidhya Das</strong><div style="font-size:11px;color:#6C81A6;">Score: 46/50</div></div></div><span class="tag tag-blu">Rank #2</span></div>
     </section>
-    <!-- 4. PARENT VIEW TAB -->
+
+    <!-- 4. PARENT VIEW (Select your child -> Locks to that batch!) -->
     <section id="tab-parent" class="tab">
-      <div class="card" style="background:#EBF2FF;border-color:#C7D9FA;"><div class="c-left"><div class="av av-pink">SD</div><div><div style="font-size:10px;font-weight:800;color:#1856F3;">STUDENT PORTAL</div><strong style="font-size:15px;color:#0F1D40;">Sannidhya Das (Class 10)</strong></div></div><span style="font-size:11px;font-weight:700;background:#DCFCE7;color:#15803D;padding:4px 8px;border-radius:6px;">Active</span></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div class="card" style="flex-direction:column;align-items:flex-start;"><div style="font-size:11px;color:#6C81A6;">Attendance</div><div style="font-size:24px;font-weight:900;color:#0F1D40;margin:4px 0;">94%</div><div style="font-size:10px;color:#10B981;font-weight:600;">22/24 Present</div></div>
-        <div class="card" style="flex-direction:column;align-items:flex-start;"><div style="font-size:11px;color:#6C81A6;">Homework</div><div style="font-size:16px;font-weight:800;color:#10B981;margin:6px 0;">Done</div><div style="font-size:10px;color:#6C81A6;">Checked</div></div>
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#6C81A6;display:block;margin-bottom:6px;">Select Student (Identifies Your Batch):</label>
+        <select id="parentSelect" onchange="updateParentPortal()" style="width:100%;padding:12px;border:1px solid #C7D9FA;border-radius:14px;background:#FFF;font-size:14px;font-weight:700;color:#0F1D40;outline:none;">
+          <option value="Sannidhya Das|Class 10|400">Sannidhya Das (Class 10)</option>
+          <option value="Pritam|Class 10|400">Pritam (Class 10)</option>
+          <option value="Ankush Ghosh|Class 10|400">Ankush Ghosh (Class 10)</option>
+          <option value="Rudro|Class 9|400">Rudro (Class 9)</option>
+          <option value="Sayan|Class 9|400">Sayan (Class 9)</option>
+        </select>
+      </div>
+      <div class="card" style="background:#EBF2FF;border-color:#C7D9FA;">
+        <div class="c-left"><div class="av av-pink" id="parentAv">SD</div><div><div style="font-size:10px;font-weight:800;color:#1856F3;">STUDENT PORTAL</div><strong id="parentName" style="font-size:15px;color:#0F1D40;">Sannidhya Das</strong><div id="parentClass" style="font-size:11px;color:#6C81A6;">Class 10 Batch</div></div></div>
+        <span class="tag" style="background:#DCFCE7;color:#15803D;">Active</span>
       </div>
       <div class="hero-fee-card">
         <div style="font-size:11px;color:#9EC5FF;">Monthly Fee Due</div>
-        <div style="font-size:32px;font-weight:900;margin-top:2px;">₹ 400</div>
-        <div style="font-size:11px;color:#BACFFF;margin-top:2px;">Anwar Classes • Class 7, 8, 9th & 10th</div>
-        <a href="upi://pay?pa=tuitiondesk@upi&pn=Anwar%20Classes&am=400&cu=INR" class="hero-fee-btn">Pay ₹400 via UPI ➔</a>
+        <div style="font-size:32px;font-weight:900;margin-top:2px;" id="parentFeeDisplay">₹ 400</div>
+        <a id="parentUpiLink" href="upi://pay?pa=tuitiondesk@upi&pn=Anwar%20Classes&am=400&cu=INR" class="hero-fee-btn">Pay via UPI ➔</a>
       </div>
     </section>
-    <!-- 5. OWNER DASHBOARD TAB -->
+    <!-- 5. OWNER TAB (PIN PROTECTED - Master Hub for 200 Students) -->
     <section id="tab-dashboard" class="tab">
-      <strong style="font-size:18px;color:#0F1D40;">Monthly Revenue (Private)</strong>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div class="card" style="background:#ECFDF5;border-color:#A7F3D0;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#065F46;font-weight:700;">Potential</span><div style="font-size:22px;font-weight:900;color:#065F46;margin:4px 0;">₹2,000</div><span style="font-size:10px;color:#059669;">5 × ₹400</span></div>
-        <div class="card" style="background:#FFF1F2;border-color:#FECDD3;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#9F1239;font-weight:700;">Pending</span><div style="font-size:22px;font-weight:900;color:#9F1239;margin:4px 0;">₹2,000</div><span style="font-size:10px;color:#E11D48;">5 Overdue</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div><strong style="font-size:18px;color:#0F1D40;">Teacher Admin Hub</strong><div style="font-size:11px;color:#6C81A6;">Manage All Batches & Income</div></div>
+        <button onclick="openModal()" style="background:#1856F3;color:#FFF;border:none;padding:8px 14px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer;">+ Add Student</button>
       </div>
-      <!-- IN-APP PIN CHANGE CARD -->
-      <div class="card" onclick="changePin()" style="cursor:pointer;border:1.5px dashed #1856F3;background:#F5F9FF;">
-        <div class="c-left">
-          <span style="font-size:22px;">🔐</span>
-          <div>
-            <strong style="color:#0F1D40;font-size:14px;">Change Security PIN</strong>
-            <div style="font-size:11px;color:#6C81A6;">Set your private teacher password</div>
-          </div>
+
+      <!-- Settings Cards: UPI & PIN -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="card" onclick="setTeacherUpi()" style="cursor:pointer;background:#F5F9FF;border:1.5px dashed #1856F3;padding:12px;flex-direction:column;align-items:flex-start;">
+          <span style="font-size:20px;">💳</span>
+          <strong style="color:#0F1D40;font-size:13px;margin-top:4px;">Set UPI ID</strong>
+          <span style="font-size:10px;color:#1856F3;" id="upiStatus">Set ID ➔</span>
         </div>
-        <span style="font-size:12px;font-weight:800;color:#1856F3;">Change ➔</span>
+        <div class="card" onclick="changePin()" style="cursor:pointer;background:#F5F9FF;border:1.5px dashed #1856F3;padding:12px;flex-direction:column;align-items:flex-start;">
+          <span style="font-size:20px;">🔐</span>
+          <strong style="color:#0F1D40;font-size:13px;margin-top:4px;">Security PIN</strong>
+          <span style="font-size:10px;color:#1856F3;">Change ➔</span>
+        </div>
+      </div>
+
+      <!-- Revenue -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="card" style="background:#ECFDF5;border-color:#A7F3D0;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#065F46;font-weight:700;">Potential</span><div style="font-size:20px;font-weight:900;color:#065F46;margin:3px 0;">₹2,000</div><span style="font-size:10px;color:#059669;">5 Students</span></div>
+        <div class="card" style="background:#FFF1F2;border-color:#FECDD3;flex-direction:column;align-items:flex-start;"><span style="font-size:11px;color:#9F1239;font-weight:700;">Pending</span><div style="font-size:20px;font-weight:900;color:#9F1239;margin:4px 0;">₹2,000</div><span style="font-size:10px;color:#E11D48;">5 Overdue</span></div>
+      </div>
+
+      <!-- Admin Actions -->
+      <strong style="font-size:15px;color:#0F1D40;">All Overdue Students (Delete / Remind)</strong>
+      <div id="feesList" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card"><div class="c-left"><div class="av av-pink">SD</div><div><strong style="font-size:14px;color:#0F1D40;">Sannidhya Das</strong><div style="font-size:11px;color:#6C81A6;">Class 10 • ₹400</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543211&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
+        <div class="card"><div class="c-left"><div class="av av-amb">PR</div><div><strong style="font-size:14px;color:#0F1D40;">Pritam</strong><div style="font-size:11px;color:#6C81A6;">Class 10 • ₹400</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=919876543212&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest('.card').remove()" class="btn-del">🗑️</button></div></div>
       </div>
     </section>
   </main>
+
   <!-- Modal -->
-  <div id="addModal"><div class="m-box"><strong style="font-size:16px;color:#0F1D40;">Add New Student</strong><input type="text" id="newStName" placeholder="Student Name" /><input type="text" id="newStClass" placeholder="Class (e.g. Class 8)" /><input type="number" id="newStFee" placeholder="Fee (Default 400)" value="400" /><input type="tel" id="newStPhone" placeholder="WhatsApp Number" /><div style="display:flex;gap:10px;"><button onclick="closeModal()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#F0F4FA;font-weight:700;color:#6C81A6;">Cancel</button><button onclick="saveNewStudent()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#1856F3;color:#FFF;font-weight:700;">Save</button></div></div></div>
+  <div id="addModal"><div class="m-box"><strong style="font-size:16px;color:#0F1D40;">Add Student to Batch</strong><input type="text" id="newStName" placeholder="Student Name" /><select id="newStClass"><option value="Class 10">Class 10</option><option value="Class 9">Class 9</option><option value="Class 8">Class 8</option><option value="Class 7">Class 7</option></select><input type="number" id="newStFee" placeholder="Fee (Default 400)" value="400" /><input type="tel" id="newStPhone" placeholder="Parent WhatsApp No." /><div style="display:flex;gap:10px;"><button onclick="closeModal()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#F0F4FA;font-weight:700;color:#6C81A6;">Cancel</button><button onclick="saveNewStudent()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#1856F3;color:#FFF;font-weight:700;">Save</button></div></div></div>
+
   <!-- Bottom Nav -->
   <nav class="b-nav">
     <button onclick="openTab('fees', this)" class="n-btn active"><span style="font-size:18px;">🏠</span><span>Home</span></button>
@@ -175,19 +173,22 @@ body{background:#DCE8FA;display:flex;justify-content:center;min-height:100vh;}
     <button onclick="openTab('dashboard', this)" class="n-btn"><span style="font-size:18px;">⚙️</span><span>Owner</span></button>
   </nav>
 </div>
+
 <script>
 var isTeacherUnlocked = false;
 
 function openTab(id, btn){
   var savedPin = localStorage.getItem('teacher_pin') || "1234";
   if(id === 'dashboard' && !isTeacherUnlocked){
-    var p = prompt("🔒 Enter Teacher PIN:");
-    if(p === savedPin){
-      isTeacherUnlocked = true;
-      alert("✅ Teacher Access Granted!");
-    } else {
-      if(p !== null) alert("❌ Incorrect PIN!");
-      return;
+    var p = prompt("🔒 Enter Teacher PIN to access Admin Hub:");
+    if(p === savedPin){ 
+      isTeacherUnlocked = true; 
+      alert("✅ Teacher Access Granted! All 200 Students Unlocked.");
+      // Unlock all batch filters for teacher
+      document.querySelectorAll('.b-pill').forEach(b => b.style.display = 'inline-block');
+      document.getElementById('currentBatchTag').innerText = "● Teacher Master View";
+    } else { 
+      if(p !== null) alert("❌ Incorrect PIN!"); return; 
     }
   }
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -196,28 +197,79 @@ function openTab(id, btn){
   btn.classList.add('active');
 }
 
-function changePin(){
-  var currentPin = localStorage.getItem('teacher_pin') || "1234";
-  var old = prompt("Enter Current PIN:");
-  if(old !== currentPin){
-    alert("❌ Current PIN galat hai!");
-    return;
-  }
-  var newP = prompt("Enter New 4-Digit PIN:");
-  if(newP && newP.length >= 4){
-    localStorage.setItem('teacher_pin', newP);
-    alert("✅ Naya PIN successfully save ho gaya: " + newP);
-  } else {
-    alert("❌ PIN kam se kam 4 digits ka hona chahiye!");
+// SMART BATCH FILTER (Isolates Class 9 from Class 10)
+function filterBatch(className, btn){
+  document.querySelectorAll('.b-pill').forEach(p=>p.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  var cards = document.querySelectorAll('#studentList .card');
+  cards.forEach(function(c){
+    if(className === 'all' || c.getAttribute('data-class') === className){ c.style.display = 'flex'; }
+    else { c.style.display = 'none'; }
+  });
+}
+
+// BATCH ISOLATION: When a student profile is chosen, lock the view to that batch!
+function updateParentPortal(){
+  var val = document.getElementById('parentSelect').value.split('|');
+  var name = val[0], cls = val[1], fee = val[2];
+  document.getElementById('parentName').innerText = name;
+  document.getElementById('parentClass').innerText = cls + " Batch";
+  document.getElementById('parentAv').innerText = name.substring(0,2).toUpperCase();
+  document.getElementById('parentFeeDisplay').innerText = "₹ " + fee;
+  var upi = localStorage.getItem('teacher_upi') || 'tuitiondesk@upi';
+  document.getElementById('parentUpiLink').href = "upi://pay?pa=" + upi + "&pn=Anwar%20Classes&am=" + fee + "&cu=INR&tn=Fee_" + encodeURIComponent(name);
+
+  // If NOT teacher, lock Home tab strictly to this student's class!
+  if(!isTeacherUnlocked){
+    filterBatch(cls, document.querySelector('.b-pill[data-class="'+cls+'"]'));
+    document.getElementById('currentBatchTag').innerText = "● " + cls + " Batch";
   }
 }
 
-function markAtt(btn, s){var p=btn.parentElement,b=p.querySelectorAll('.b-att');b[0].className='b-att off';b[1].className='b-att off';if(s==='P')b[0].className='b-att p-on';else b[1].className='b-att a-on';}
-function openModal(){document.getElementById('addModal').style.display='flex';}
-function closeModal(){document.getElementById('addModal').style.display='none';}
-function saveNewStudent(){var n=document.getElementById('newStName').value.trim();if(!n)return;var c=document.getElementById('newStClass').value||'Class 8',f=document.getElementById('newStFee').value||'400',p=document.getElementById('newStPhone').value||'9876543210',i=n.substring(0,2).toUpperCase();document.getElementById('feesList').innerHTML+='<div class="card" style="border-left:4px solid #1856F3;"><div class="c-left"><div class="av av-blu">'+i+'</div><div><strong style="color:#0F1D40;">'+n+'</strong><div style="font-size:12px;color:#6C81A6;">₹'+f+' due • '+c+'</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=91'+p+'&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest(\'.card\').remove()" class="btn-del">🗑️</button></div></div>';closeModal();}
-function bulkRemindWhatsApp(){window.location.href="whatsapp://send?text="+encodeURIComponent("Gentle reminder: Tuition fee of Rs 400 is pending. Kindly clear via UPI.");}
-function shareTest(n,s,r){window.location.href="whatsapp://send?text="+encodeURIComponent('Report Card:\nStudent: '+n+'\nScore: '+s+'/50 (Rank #'+r+')');}
+function setTeacherUpi(){
+  var currentUpi = localStorage.getItem('teacher_upi') || 'tuitiondesk@upi';
+  var newUpi = prompt("Enter Teacher UPI ID (e.g. 9876543210@paytm, sir@oksbi):", currentUpi);
+  if(newUpi && newUpi.includes('@')){
+    localStorage.setItem('teacher_upi', newUpi.trim());
+    alert("✅ UPI ID Saved: " + newUpi);
+    updateUpiDisplay();
+  }
+}
+
+function updateUpiDisplay(){
+  var upi = localStorage.getItem('teacher_upi');
+  if(upi) document.getElementById('upiStatus').innerText = upi;
+  updateParentPortal();
+}
+
+function changePin(){
+  var currentPin = localStorage.getItem('teacher_pin') || "1234";
+  var old = prompt("Enter Current PIN:");
+  if(old !== currentPin){ alert("❌ Current PIN galat hai!"); return; }
+  var newP = prompt("Enter New 4-Digit PIN:");
+  if(newP && newP.length >= 4){ localStorage.setItem('teacher_pin', newP); alert("✅ Naya PIN save ho gaya: " + newP); }
+}
+
+function openModal(){ document.getElementById('addModal').style.display='flex'; }
+function closeModal(){ document.getElementById('addModal').style.display='none'; }
+
+function saveNewStudent(){
+  var n=document.getElementById('newStName').value.trim();if(!n)return;
+  var c=document.getElementById('newStClass').value;
+  var f=document.getElementById('newStFee').value||'400';
+  var p=document.getElementById('newStPhone').value||'9876543210';
+  var i=n.substring(0,2).toUpperCase();
+
+  document.getElementById('studentList').innerHTML += '<div class="card" data-class="'+c+'"><div class="c-left"><div class="av av-blu">'+i+'</div><div><strong style="font-size:14px;color:#0F1D40;">'+n+'</strong><div style="font-size:12px;color:#6C81A6;">'+c+'</div></div></div><span class="tag tag-blu">'+c+'</span></div>';
+  var opt = document.createElement('option');
+  opt.value = n + '|' + c + '|' + f;
+  opt.innerText = n + ' (' + c + ')';
+  document.getElementById('parentSelect').appendChild(opt);
+  document.getElementById('feesList').innerHTML += '<div class="card"><div class="c-left"><div class="av av-blu">'+i+'</div><div><strong style="color:#0F1D40;">'+n+'</strong><div style="font-size:11px;color:#6C81A6;">'+c+' • ₹'+f+'</div></div></div><div style="display:flex;gap:6px;"><a href="whatsapp://send?phone=91'+p+'&text=Fee%20pending" class="btn-wa">💬</a><button onclick="this.closest(\'.card\').remove()" class="btn-del">🗑️</button></div></div>';
+  closeModal();
+}
+
+window.onload = function(){ updateUpiDisplay(); };
 </script>
 </body>
 </html>
